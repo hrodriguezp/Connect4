@@ -1,7 +1,7 @@
 package com.aetxabao.connect4;
 
 /**
- * @author Nombre Apellido
+ * @author Hugo Rodriguez
  */
 public class Tablero {
 
@@ -95,9 +95,11 @@ public class Tablero {
     }
 
     public boolean estaColumnaLibre(int columna) {
+        //ComprobaciÃ³n inicial columna valor vÃ¡lido
         if (columna < 0 || columna > m.length - 1) {
             return false;
         }
+        // Valido si la primera casilla (parte derecha de m) estÃ¡ libre
         return m[columna][5] == L;
     }
 
@@ -131,27 +133,19 @@ A | X | X | X | O | O | O | X | A
  -----------------------------
  | 1 | 2 | 3 | 4 | 5 | 6 | 7 |
      */
+
     public void inserta(char ficha, int columna) {
         for (int j = 0; j < m.length; j++) {
             if (m[columna][j] == L) {
                 m[columna][j] = ficha;
                 contador++;
+                System.out.println("He metido la ficha en m[" + columna + "," + j + "] = " + m[columna][j]);
                 break;
+            } else {
+                System.out.println("He leido la m[" + columna + "," + j + "] = " + m[columna][j]);
             }
         }
     }
-        /*
-            boolean noIntroducida=false;
-            int j = 0;
-            while (j < m.length && !noIntroducida){
-                if (m[columna][j] == L){
-                    m[columna][j] = ficha;
-                    contador++;
-                    noIntroducida = true;
-                }
-                j++;
-            }
-         */
 
     public boolean estaLleno() {
         return contador == alto * ancho;
@@ -167,8 +161,9 @@ A | X | X | X | O | O | O | X | A
     }
 
     public boolean ganaHorizontal(char jugador) {
+        //System.out.println( +"-"+ m.length ); 6-7
         for (int j = 0; j < m[0].length; j++) {
-            for (int i = 0; i < m.length - 3; i++)
+            for (int i = 0; i < m.length - 3; i++) //System.out.println("PosiciÃ³n valida ["+i+","+j+"]");
             {
                 if (hay4Horizontales(i, j, jugador)) {
                     return true;
@@ -185,21 +180,16 @@ A | X | X | X | O | O | O | X | A
             return false;
         }
     }
-
     /*
         char[][] m1 = {
- {X, O, X, O, L, L},   00 01 02 03 04 05
- {X, O, L, L, L, L},   10 11 12 13 14 15
- {X, O, X, O, O, X},   20 21 22 23 24 25
- {O, X, O, O, X, X},   30 31 32 33 34 35
- {O, X, X, O, L, L},   40 41 42 43 44 45
- {O, O, L, L, L, L},   50 51 52 53 54 55
- {X, X, O, L, L, L}    60 61 62 63 64 65
+    {X, O, X, O, L, L},   00 01 02 03 04 05
+    {X, O, L, L, L, L},   10 11 12 13 14 15
+    {X, O, X, O, O, X},   20 21 22 23 24 25
+    {O, X, O, O, X, X},   30 31 32 33 34 35
+    {O, X, X, O, L, L},   40 41 42 43 44 45
+    {O, O, L, L, L, L},   50 51 52 53 54 55
+    {X, X, O, L, L, L}    60 61 62 63 64 65
  };
-    /*
-
-
-
      */
     private boolean ganaVertical(char jugador) {
         for (int j = 0; j <= m[0].length; j++) {
@@ -214,18 +204,18 @@ A | X | X | X | O | O | O | X | A
     }
 
     private boolean hay4Verticales(int columna, int fila, char jugador) {
-        if (m[columna][fila] == jugador && m[columna][fila + 1] == jugador && m[columna][fila + 2] == jugador && m[columna][fila + 3] == jugador) {
-            return true;
-        } else {
-            return false;
-        }
+            if (m[columna][fila] == jugador && m[columna][fila + 1] == jugador && m[columna][fila + 2] == jugador && m[columna][fila + 3] == jugador) {
+                return true;
+            } else {
+                return false;
+            }
     }
 
     private boolean ganaDiagonalArriba(char jugador) {
-        for (int i = 0; i < m[0].length - 3; i++) {
-            for (int j = 0; j < m.length - 3; j++)
+        for (int j = 0; j < m[0].length - 3; j++) {
+            for (int i = 0; i < m.length - 3; i++)
             {
-                if (hay4DiagonalesArriba(j, i, jugador)) {
+                if (hay4DiagonalesArriba(i, j, jugador)) {
                     return true;
                 }
             }
@@ -234,7 +224,6 @@ A | X | X | X | O | O | O | X | A
     }
 
     private boolean hay4DiagonalesArriba(int columna, int fila, char jugador) {
-        //TODO: hay4DiagonalesArriba
         if (m[columna][fila] == jugador && m[columna + 1][fila + 1] == jugador && m[columna + 2][fila + 2] == jugador && m[columna + 3][fila + 3] == jugador) {
             return true;
         } else {
@@ -242,30 +231,19 @@ A | X | X | X | O | O | O | X | A
         }
     }
 
-
-
-
     private boolean ganaDiagonalAbajo(char jugador) {
-        for (int j = 3; j < m.length; j++) {
-            for (int i = 0; i < m[0].length - 3; i++)
-            {
-                if (hay4DiagonalesAbajo(j, i, jugador)) {
-                    return true;
-                }
-            }
-        }
-        return false;
+        //TODO: ganaDiagonalAbajo
+        boolean b = false;
+        return b;
     }
 
     private boolean hay4DiagonalesAbajo(int columna, int fila, char jugador) {
-        if (m[columna][fila] == jugador && m[columna + 1][fila + 1] == jugador && m[columna + 2][fila + 2] == jugador && m[columna + 3][fila + 3] == jugador) {
-            return true;
-        } else {
-            return false;
-        }
+        //TODO: hay4DiagonalesAbajo
+        return true;
     }
 
     public boolean estaFinalizado() {
         return estaLleno() || gana(turno);
     }
 }
+

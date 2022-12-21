@@ -367,7 +367,7 @@ class TableroTest {
     void testGanaDiagonalArriba4() {
         char[][] m = {
                 {L, L, L, L, L, L},
-                {L, L, L, L, L, L},
+            {L, L, L, L, L, L},
                 {L, L, L, L, L, L},
                 {O, X, O, L, L, L},
                 {X, O, X, O, L, L},
