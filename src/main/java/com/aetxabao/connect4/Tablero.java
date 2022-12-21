@@ -232,14 +232,23 @@ A | X | X | X | O | O | O | X | A
     }
 
     private boolean ganaDiagonalAbajo(char jugador) {
-        //TODO: ganaDiagonalAbajo
-        boolean b = false;
-        return b;
+        for (int j = 0; j < m[0].length - 3; j++) {
+            for (int i = 3; i < m.length; i++)
+            {
+                if (hay4DiagonalesAbajo(i, j, jugador)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     private boolean hay4DiagonalesAbajo(int columna, int fila, char jugador) {
-        //TODO: hay4DiagonalesAbajo
-        return true;
+        if (m[columna][fila] == jugador && m[columna - 1][fila + 1] == jugador && m[columna - 2][fila + 2] == jugador && m[columna - 3][fila + 3] == jugador) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public boolean estaFinalizado() {
